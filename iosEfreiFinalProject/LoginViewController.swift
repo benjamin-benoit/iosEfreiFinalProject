@@ -31,6 +31,7 @@ class LoginViewController: UIViewController, SignUpViewDelegate, SignInViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         signUpView.isHidden = false
         signInView.isHidden = true
         profilView.isHidden = true
@@ -41,71 +42,142 @@ class LoginViewController: UIViewController, SignUpViewDelegate, SignInViewDeleg
     }
     
     func signUpAction() {
-        if (!isValidEmail(email: signUpView.email.text ?? "")){
-            print("email non valide")
-        } else if ((!(signUpView.email.text?.isEmpty ?? true) && !(signUpView.password.text?.isEmpty ?? true) && !(signUpView.confirmPassword.text?.isEmpty ?? true)) && signUpView.password.text == signUpView.confirmPassword.text){
-            var user: User = User.init(email: signUpView.email.text ?? "", password: signUpView.password.text ?? "")
+        if ((signUpView.email.text?.isEmpty ?? true) || (signUpView.password.text?.isEmpty ?? true) || (signUpView.confirmPassword.text?.isEmpty ?? true)) {
+            signUpError(err: true)
+            signUpView.messageError.text = "Some fields are empty"
+        } else if (signUpView.password.text != signUpView.confirmPassword.text) {
+            signUpError(err: true)
+            signUpView.messageError.text = "Passwords are note the same"
+        } else if (!isValidEmail(email: signUpView.email.text ?? "")){
+            signUpError(err: true)
+            signUpView.messageError.text = "Email is not valid"
+        } else {
+            signUpError()
+            
+            let user: User = User.init(email: signUpView.email.text ?? "", password: signUpView.password.text ?? "")
             
             RegisterUser.register(user: user)
-            
             print("Successful sign up")
             
-            signUpView.isHidden = true
-            signInView.isHidden = false
-            profilView.isHidden = true
+            changeView(signIn: false)
         }
     }
     
     func goToLoginAction() {
-        print("goToLoginAction")
-        signUpView.isHidden = true
-        signInView.isHidden = false
-        profilView.isHidden = true
+        changeView(signIn : false)
     }
     
     func loginAction() {
         if (RegisterUser.user == nil) {
-            print("Please register first")
-        } else if ((!(signInView.email.text?.isEmpty ?? true) && !	(signInView.password.text?.isEmpty ?? true)) && (signInView.email.text == RegisterUser.user?.userEmail && signInView.password.text == RegisterUser.user?.userPassword)){
+            signInError(err: true)
+            signInView.messageError.text = "Please register first"
+        } else if ((signInView.email.text?.isEmpty ?? true) || (signInView.password.text?.isEmpty ?? true)) {
+            signInError(err: true)
+            signInView.messageError.text = "Some fields are empty"
+        } else if (signInView.email.text == RegisterUser.user?.userEmail && signInView.password.text == RegisterUser.user?.userPassword){
             print("Successful login")
             
             if ((RegisterUser.user) != nil) {
                 profilView.email.text = "Email: " + (RegisterUser.user?.userEmail ?? "")
             }
             
-            signUpView.isHidden = true
-            signInView.isHidden = true
-            profilView.isHidden = false
+            changeView(profil: false)
         } else {
-            print("Unable to find a match with this pair of email / password")
+            signInError(err: true)
+            signInView.messageError.text = "Unable to find a match with this pair of email / password"
         }
     }
     
     func registerAction() {
-        print("registerAction")
-        signUpView.isHidden = false
-        signInView.isHidden = true
-        profilView.isHidden = true
+        changeView(signUp: false)
     }
     
     func changePasswordAction() {
-        if(!(profilView.newPassword.text?.isEmpty ?? true) || !(profilView.confirmNewPassword.text?.isEmpty ?? true)) {
-            RegisterUser.user?.userPassword = profilView.newPassword.text ?? ""
-            print("Password change is a success")
+        if((profilView.newPassword.text?.isEmpty ?? true) || (profilView.confirmNewPassword.text?.isEmpty ?? true)) {
+            profilError(err: true)
+            profilView.messageError.textColor = UIColor.red
+            profilView.messageError.text = "Some fields are empty"
+        } else if (profilView.newPassword.text != profilView.confirmNewPassword.text) {
+            profilError(err: true)
+            profilView.messageError.textColor = UIColor.red
+            profilView.messageError.text = "Passwords are not matching"
         } else {
-            print("Passwords are not matching")
+            profilError(err: true)
+            RegisterUser.user?.userPassword = profilView.newPassword.text ?? ""
+            profilView.messageError.textColor = UIColor.green
+            profilView.messageError.text = "Password change is a success"
+            profilView.newPassword.text = ""
+            profilView.confirmNewPassword.text = ""
         }
     }
     
     func logoutAction() {
-        signUpView.isHidden = true
-        signInView.isHidden = false
-        profilView.isHidden = true
+        changeView(signIn: false)
     }
     
-    //fonctions
+    func changeView (signUp: Bool = true, signIn: Bool = true, profil: Bool = true) {
+        signUpView.isHidden = signUp
+        signUpError()
+        signInView.isHidden = signIn
+        signInError()
+        profilView.isHidden = profil
+        profilError()
+        if (signUp == true) {
+            signUpView.email.text = ""
+            signUpView.password.text = ""
+            signUpView.confirmPassword.text = ""
+        }
+        if (signIn == true) {
+            signInView.email.text = ""
+            signInView.password.text = ""
+        }
+        if (profil == true) {
+            profilView.newPassword.text = ""
+            profilView.confirmNewPassword.text = ""
+        }
+    }
+    
+    func signUpError(err: Bool = false) {
+        if (err == true) {
+            signUpView.messageError.isHidden = false
+            signUpView.constraintWithError.priority = UILayoutPriority(rawValue: 999)
+            signUpView.constraintWithoutError.priority = UILayoutPriority(rawValue: 995)
+        } else {
+            signUpView.messageError.isHidden = true
+            signUpView.constraintWithError.priority = UILayoutPriority(rawValue: 995)
+            signUpView.constraintWithoutError.priority = UILayoutPriority(rawValue: 999)
+        }
+    }
+    
+    func signInError(err: Bool = false) {
+        if (err == true) {
+            signInView.messageError.isHidden = false
+            signInView.constraintWithError.priority = UILayoutPriority(rawValue: 999)
+            signInView.constraintWithoutError.priority = UILayoutPriority(rawValue: 995)
+        } else {
+            signInView.messageError.isHidden = true
+            signInView.constraintWithError.priority = UILayoutPriority(rawValue: 995)
+            signInView.constraintWithoutError.priority = UILayoutPriority(rawValue: 999)
+        }
+    }
+    
+    func profilError(err: Bool = false) {
+        if (err == true) {
+            profilView.messageError.isHidden = false
+            profilView.constraintWithError.priority = UILayoutPriority(rawValue: 999)
+            profilView.constraintWithoutError.priority = UILayoutPriority(rawValue: 995)
+        } else {
+            profilView.messageError.isHidden = true
+            profilView.constraintWithError.priority = UILayoutPriority(rawValue: 995)
+            profilView.constraintWithoutError.priority = UILayoutPriority(rawValue: 999)
+        }
+    }
     
     func isValidEmail(email:String) -> Bool {
+        if (email.count < 7) {
+            return false
+        }
+        
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)

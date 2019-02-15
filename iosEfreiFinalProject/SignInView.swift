@@ -15,6 +15,9 @@ class SignInView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var messageError: UILabel!
+    @IBOutlet weak var constraintWithError: NSLayoutConstraint!
+    @IBOutlet weak var constraintWithoutError: NSLayoutConstraint!
     
     @IBAction func loginAction() {
         delegate?.loginAction()

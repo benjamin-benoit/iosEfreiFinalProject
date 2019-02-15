@@ -13,8 +13,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfilView" customModule="iosEfreiFinalProject" customModuleProvider="target">
             <connections>
                 <outlet property="confirmNewPassword" destination="Xdh-Jr-EvY" id="2f7-Us-rHV"/>
+                <outlet property="constraintWithError" destination="qhd-qw-nWg" id="tod-fU-4U4"/>
+                <outlet property="constraintWithoutError" destination="fjP-RF-GkW" id="dh1-sn-mfM"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="XbW-vg-k2A"/>
                 <outlet property="email" destination="ec4-dp-Fs5" id="h67-5u-nj3"/>
+                <outlet property="messageError" destination="1Hq-SL-m0k" id="NTw-hh-UAP"/>
                 <outlet property="newPassword" destination="PvJ-kG-l8b" id="hYM-vv-Acb"/>
             </connections>
         </placeholder>
@@ -28,36 +31,52 @@
                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                    </variation>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oe3-fY-OFS">
                     <rect key="frame" x="16" y="72.5" width="98" height="20.5"/>
                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                    </variation>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PvJ-kG-l8b">
                     <rect key="frame" x="16" y="109" width="343" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="6aR-rZ-fvI">
+                            <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                        </constraint>
+                    </constraints>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm New Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jo3-RZ-gSo">
                     <rect key="frame" x="16" y="155" width="156" height="20.5"/>
                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                    </variation>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xdh-Jr-EvY">
                     <rect key="frame" x="16" y="191.5" width="343" height="30"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qN3-tc-Wvl">
                     <rect key="frame" x="16" y="237.5" width="343" height="45"/>
                     <color key="backgroundColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="45" id="9Oq-QD-79K"/>
+                        <constraint firstAttribute="height" constant="45" id="9Oq-QD-79K">
+                            <variation key="heightClass=regular-widthClass=regular" constant="55"/>
+                        </constraint>
                     </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -76,6 +95,18 @@
                         <action selector="logoutAction" destination="-1" eventType="touchUpInside" id="Fvi-cA-yRL"/>
                     </connections>
                 </button>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Hq-SL-m0k">
+                    <rect key="frame" x="16" y="298.5" width="343" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="b6G-gv-bAX"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                    <color key="textColor" red="1" green="0.0" blue="0.1634348793" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                    </variation>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -83,26 +114,32 @@
                 <constraint firstItem="ec4-dp-Fs5" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="9jj-LJ-ewP"/>
                 <constraint firstItem="PvJ-kG-l8b" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="BFs-py-DzJ"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="kjK-AZ-zib" secondAttribute="trailing" constant="16" id="CZG-kV-Obj"/>
+                <constraint firstItem="Xdh-Jr-EvY" firstAttribute="height" secondItem="PvJ-kG-l8b" secondAttribute="height" id="Dq0-bf-LT7"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="PvJ-kG-l8b" secondAttribute="trailing" constant="16" id="J0e-ps-gJv"/>
                 <constraint firstItem="Xdh-Jr-EvY" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="K3g-mb-iq7"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Xdh-Jr-EvY" secondAttribute="trailing" constant="16" id="KnH-vr-m21"/>
                 <constraint firstItem="PvJ-kG-l8b" firstAttribute="top" secondItem="Oe3-fY-OFS" secondAttribute="bottom" constant="16" id="Nk2-Ho-27i"/>
+                <constraint firstItem="1Hq-SL-m0k" firstAttribute="top" secondItem="qN3-tc-Wvl" secondAttribute="bottom" constant="16" id="OTQ-i4-PTs"/>
                 <constraint firstItem="Oe3-fY-OFS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="PRq-0i-73U"/>
                 <constraint firstItem="jo3-RZ-gSo" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="R3T-t5-KBx"/>
                 <constraint firstItem="kjK-AZ-zib" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="SV7-DG-c63"/>
                 <constraint firstItem="kjK-AZ-zib" firstAttribute="height" secondItem="qN3-tc-Wvl" secondAttribute="height" id="TNs-Jo-qP3"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="qN3-tc-Wvl" secondAttribute="trailing" constant="16" id="X67-OD-0CM"/>
-                <constraint firstItem="kjK-AZ-zib" firstAttribute="top" secondItem="qN3-tc-Wvl" secondAttribute="bottom" constant="16" id="YOz-FC-UNn"/>
                 <constraint firstItem="qN3-tc-Wvl" firstAttribute="top" secondItem="Xdh-Jr-EvY" secondAttribute="bottom" constant="16" id="Z0T-n7-jsP"/>
                 <constraint firstItem="jo3-RZ-gSo" firstAttribute="top" secondItem="PvJ-kG-l8b" secondAttribute="bottom" constant="16" id="fVm-zw-WlA"/>
+                <constraint firstItem="kjK-AZ-zib" firstAttribute="top" secondItem="qN3-tc-Wvl" secondAttribute="bottom" priority="999" constant="16" id="fjP-RF-GkW"/>
                 <constraint firstItem="ec4-dp-Fs5" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="guh-jf-Er6"/>
                 <constraint firstItem="qN3-tc-Wvl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="igj-1R-lHN"/>
+                <constraint firstItem="kjK-AZ-zib" firstAttribute="top" secondItem="1Hq-SL-m0k" secondAttribute="bottom" priority="995" constant="16" id="qhd-qw-nWg"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="1Hq-SL-m0k" secondAttribute="trailing" constant="16" id="rnz-vl-w98"/>
+                <constraint firstItem="1Hq-SL-m0k" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="se0-OO-Tdk"/>
                 <constraint firstItem="Xdh-Jr-EvY" firstAttribute="top" secondItem="jo3-RZ-gSo" secondAttribute="bottom" constant="16" id="tRU-3h-bWw"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="24.5" y="51.5"/>
         </view>
     </objects>
 </document>

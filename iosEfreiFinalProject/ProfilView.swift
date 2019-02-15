@@ -16,6 +16,9 @@ class ProfilView: UIView {
     @IBOutlet weak var email: UILabel!
     @IBOutlet weak var newPassword: UITextField!
     @IBOutlet weak var confirmNewPassword: UITextField!
+    @IBOutlet weak var messageError: UILabel!
+    @IBOutlet weak var constraintWithError: NSLayoutConstraint!
+    @IBOutlet weak var constraintWithoutError: NSLayoutConstraint!
     
     @IBAction func changePasswordAction() {
         delegate?.changePasswordAction()
