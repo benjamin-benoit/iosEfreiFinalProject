@@ -45,6 +45,9 @@ class LoginViewController: UIViewController, SignUpViewDelegate, SignInViewDeleg
         if ((signUpView.email.text?.isEmpty ?? true) || (signUpView.password.text?.isEmpty ?? true) || (signUpView.confirmPassword.text?.isEmpty ?? true)) {
             signUpError(err: true)
             signUpView.messageError.text = "Some fields are empty"
+        } else if (!isValidPassword(passw: signUpView.password.text ?? "") || !isValidPassword(passw: signUpView.password.text ?? "")) {
+            signUpError(err: true)
+            signUpView.messageError.text = "You need more than 8 characters for passwords"
         } else if (signUpView.password.text != signUpView.confirmPassword.text) {
             signUpError(err: true)
             signUpView.messageError.text = "Passwords are note the same"
@@ -182,6 +185,11 @@ class LoginViewController: UIViewController, SignUpViewDelegate, SignInViewDeleg
         
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: email)
+    }
+    
+    func isValidPassword(passw:String) -> Bool {
+        let bool = passw.count < 8 ? false : true
+        return bool
     }
 }
 
